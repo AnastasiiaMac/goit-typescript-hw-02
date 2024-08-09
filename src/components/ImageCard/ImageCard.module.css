@@ -1,0 +1,16 @@
+.image {
+  height: 260px;
+  width: 350px;
+}
+.imageBottom {
+  width: 350px;
+  height: 180px;
+  background-color: #8b7cce4a;
+  border: 1px solid #5c6297;
+  border-top: none;
+
+  padding: 10px;
+}
+.description {
+  text-transform: uppercase;
+}

@@ -1,0 +1,14 @@
+.galleryList {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.item {
+  background-color: #8b7cce4a;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+.item:hover {
+  transform: scale(1.05);
+}
