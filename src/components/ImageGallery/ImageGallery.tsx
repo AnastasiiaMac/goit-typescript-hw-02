@@ -1,26 +1,23 @@
+import React from "react";
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
-const ImageGallery = ({ data, openModal }) => {
+import { Image } from "../App/App.types";
+
+type Props = {
+  data: Image[];
+  openModal: (datum: Image) => void;
+};
+
+const ImageGallery: React.FC<Props> = ({ data, openModal }) => {
   return (
     <ul className={css.galleryList}>
-      {data.map((datum) => {
-        return (
-          <li className={css.item} key={datum.id}>
-            <div>
-              <ImageCard
-                url={datum.urls.small}
-                name={datum.alt_description}
-                datum={datum}
-                openModal={openModal}
-                pictureDescription={datum.alt_description}
-                author={datum.user.name}
-                likes={datum.likes}
-              />
-            </div>
-          </li>
-        );
-      })}
+      {data.map((datum) => (
+        <li className={css.item} key={datum.id}>
+          <ImageCard imageItem={datum} openModal={openModal} datum={datum} />
+        </li>
+      ))}
     </ul>
   );
 };
+
 export default ImageGallery;
