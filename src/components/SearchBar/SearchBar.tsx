@@ -1,19 +1,30 @@
+import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 import css from "./Search.Bar.module.css";
 import { IoMdSearch } from "react-icons/io";
 
-const SearchBar = ({ onSearch }) => {
-  const handleSubmit = (evt) => {
+type Props = {
+  onSearch: (searchQuery: string) => void;
+};
+
+const SearchBar: React.FC<Props> = ({ onSearch }) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const form = evt.target;
-    const searchQuery = form.elements.searchWord.value;
+
+    const form = evt.currentTarget;
+    const searchQuery = (
+      form.elements.namedItem("searchWord") as HTMLInputElement
+    ).value;
+
     if (searchQuery.trim() === "") {
       toast.error("Search field cannot be empty");
       return;
     }
+
     onSearch(searchQuery);
     form.reset();
   };
+
   return (
     <header className={css.header}>
       <form className={css.form} onSubmit={handleSubmit}>
@@ -38,4 +49,5 @@ const SearchBar = ({ onSearch }) => {
     </header>
   );
 };
+
 export default SearchBar;
