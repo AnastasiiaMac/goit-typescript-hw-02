@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
-import SearchBar from "./SearchBar/SearchBar";
-import fetchImagesBySearchQuery from "../images-api";
-import Loader from "./Loader/Loader";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import SearchBar from "../SearchBar/SearchBar";
+import fetchImagesBySearchQuery from "../../images-api";
+import Loader from "../Loader/Loader";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Modal from "react-modal";
-import ImageModal from "./ImageModal/ImageModal";
-import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import { Image } from "./App.types";
+interface ImageData {
+  total_pages: number;
+  total: number;
+  results: Image[];
+}
 export default function App() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(999);
   const [searchTopic, setSearchTopic] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+
   Modal.setAppElement("#root");
-  function openModal(image) {
+  function openModal(image: Image) {
     setSelectedImage(image);
     setIsOpen(true);
   }
@@ -25,7 +32,7 @@ export default function App() {
     setIsOpen(false);
     setSelectedImage(null);
   }
-  const handleSearch = async (searchQuery) => {
+  const handleSearch = async (searchQuery: string) => {
     setImages([]);
     setPage(1);
     setSearchTopic(searchQuery);
@@ -41,7 +48,10 @@ export default function App() {
       try {
         setLoading(true);
         setError(false);
-        const data = await fetchImagesBySearchQuery(searchTopic, page);
+        const data: ImageData = await fetchImagesBySearchQuery(
+          searchTopic,
+          page
+        );
         setTotalPages(data.total_pages);
 
         setImages((prevImages) => {
