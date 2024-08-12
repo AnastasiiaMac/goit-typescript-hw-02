@@ -48,15 +48,17 @@ export default function App() {
       try {
         setLoading(true);
         setError(false);
-        const data: ImageData = await fetchImagesBySearchQuery(
+        const data = await fetchImagesBySearchQuery<ImageData>(
           searchTopic,
           page
         );
-        setTotalPages(data.total_pages);
 
-        setImages((prevImages) => {
-          return [...prevImages, ...data.results];
-        });
+        if (data) {
+          setTotalPages(data.total_pages);
+          setImages((prevImages) => [...prevImages, ...data.results]);
+        } else {
+          setError(true);
+        }
       } catch (error) {
         setError(true);
       } finally {
