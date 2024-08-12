@@ -15,12 +15,12 @@ interface ImageData {
 }
 export default function App() {
   const [images, setImages] = useState<Image[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(999);
-  const [searchTopic, setSearchTopic] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(999);
+  const [searchTopic, setSearchTopic] = useState<string>("");
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   Modal.setAppElement("#root");
