@@ -7,7 +7,7 @@ type Props = {
   onSearch: (searchQuery: string) => void;
 };
 
-const SearchBar: React.FC<Props> = ({ onSearch }) => {
+const SearchBar = ({ onSearch }: Props) => {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 

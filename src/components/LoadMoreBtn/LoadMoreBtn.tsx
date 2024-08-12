@@ -5,7 +5,7 @@ type Props = {
   onClick: () => void;
 };
 
-const LoadMoreBtn: React.FC<Props> = ({ onClick }) => {
+const LoadMoreBtn = ({ onClick }: Props) => {
   return (
     <button className={css.button} onClick={onClick} type="button">
       Load more

@@ -8,12 +8,12 @@ type Props = {
   openModal: (datum: Image) => void;
 };
 
-const ImageGallery: React.FC<Props> = ({ data, openModal }) => {
+const ImageGallery = ({ data, openModal }: Props) => {
   return (
     <ul className={css.galleryList}>
       {data.map((datum) => (
         <li className={css.item} key={datum.id}>
-          <ImageCard imageItem={datum} openModal={openModal} datum={datum} />
+          <ImageCard imageItem={datum} openModal={openModal} />
         </li>
       ))}
     </ul>

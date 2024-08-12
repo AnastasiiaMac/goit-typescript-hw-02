@@ -9,7 +9,7 @@ type Props = {
   image: Image | null;
 };
 
-const ImageModal: React.FC<Props> = ({ modalIsOpen, closeModal, image }) => {
+const ImageModal = ({ modalIsOpen, closeModal, image }: Props) => {
   if (!image) return null;
 
   return (
@@ -18,9 +18,10 @@ const ImageModal: React.FC<Props> = ({ modalIsOpen, closeModal, image }) => {
       onRequestClose={closeModal}
       className={css.modal}
       overlayClassName={css.overlay}
+      ariaHideApp={false}
     >
       <div className={css.content}>
-        <img src={image.urls.regular} alt={image.alt_description} />
+        <img src={image.urls.regular} alt={image.alt_description || "Image"} />
       </div>
     </Modal>
   );

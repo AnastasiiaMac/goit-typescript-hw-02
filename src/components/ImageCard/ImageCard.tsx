@@ -5,17 +5,16 @@ import { Image } from "../App/App.types";
 type Props = {
   imageItem: Image;
   openModal: (datum: Image) => void;
-  datum: Image;
 };
 
-const ImageCard: React.FC<Props> = ({ imageItem, openModal, datum }) => {
+const ImageCard = ({ imageItem, openModal }: Props) => {
   return (
     <div className={css.imageContainer}>
       <img
         className={css.image}
         src={imageItem.urls.small}
         alt={imageItem.alt_description}
-        onClick={() => openModal(datum)}
+        onClick={() => openModal(imageItem)}
       />
       <div className={css.imageBottom}>
         <p className={css.description}>{imageItem.alt_description}</p>
